@@ -5,18 +5,18 @@ namespace App\Filters;
 
 
 /**
- * Class PhoneFilter
+ * Class PublisherFilter
  * @package App\Filters
  * @author Abdullahi Abdulkabir <abdullahiabdulkabir1@gmail.com>
  */
-class PhoneFilter
+class PublisherFilter
 {
 
     public function handle($query, $next)
     {
-        $phone = request()->get('phone');
-        $query->when($phone, function ($query, $phone) {
-            $query->where('phone', 'LIKE', '%' . $phone . '%');
+        $publisher = request()->get('publisher');
+        $query->when($publisher, function ($query, $publisher) {
+            $query->where('publisher', 'LIKE', '%' . $publisher . '%');
         });
         return $next($query);
     }

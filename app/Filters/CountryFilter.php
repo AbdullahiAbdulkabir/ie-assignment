@@ -5,17 +5,17 @@ namespace App\Filters;
 
 
 /**
- * Class NameFilter
+ * Class CountryFilter
  * @package App\Filters
  * @author Abdullahi Abdulkabir <abdullahiabdulkabir1@gmail.com>
  */
-class NameFilter
+class CountryFilter
 {
     public function handle($query, $next)
     {
-        $name = request()->get('name');
-        $query->when($name, function ($query, $name) {
-            $query->where('name', 'LIKE', '%' . strtolower($name) . '%');
+        $country = request()->get('country');
+        $query->when($country, function ($query, $country) {
+            $query->where('country', 'LIKE', '%' . strtolower($country) . '%');
         });
         return $next($query);
     }

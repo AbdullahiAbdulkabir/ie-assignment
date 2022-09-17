@@ -5,18 +5,18 @@ namespace App\Filters;
 
 
 /**
- * Class AddressFilter
+ * Class ReleaseDateFilter
  * @package App\Filters
  * @author Abdullahi Abdulkabir <abdullahiabdulkabir1@gmail.com>
  */
-class AddressFilter
+class ReleaseDateFilter
 {
 
     public function handle($query, $next)
     {
-        $address = request()->get('address');
-        $query->when($address, function ($query, $address) {
-            $query->where('address', 'LIKE', '%' . strtolower($address) . '%');
+        $releaseDate = request()->get('release_date');
+        $query->when($releaseDate, function ($query, $releaseDate) {
+            $query->whereYear('release_date', $releaseDate);
         });
         return $next($query);
     }

@@ -15,10 +15,11 @@ class Controller extends BaseController
 
     protected int $statusCode = ResponseAlias::HTTP_OK;
 
-    public function setStatusCode($statusCode): static
+    public function respondWithSuccess($data, $statusCode = ResponseAlias::HTTP_OK, $statusMessage = 'success'): JsonResponse
     {
-        $this->statusCode = $statusCode;
-        return $this;
+        return $this->setStatusCode($statusCode)->jsonResponse(is_array($data) ?
+            array_merge(['status_code' => $statusCode,
+                'status' => $statusMessage], $data) : ['message' => $data]);
     }
 
     /**
@@ -31,10 +32,9 @@ class Controller extends BaseController
         return response()->json(array_merge($data, ['status_code' => $this->statusCode]), $this->statusCode);
     }
 
-    public function respondWithSuccess($data, $statusCode = ResponseAlias::HTTP_OK, $statusMessage = 'success'): JsonResponse
+    public function setStatusCode($statusCode): static
     {
-        return $this->setStatusCode($statusCode)->jsonResponse(is_array($data) ?
-            array_merge(['status_code' => $statusCode,
-                'status' => $statusMessage], $data) : ['message' => $data]);
+        $this->statusCode = $statusCode;
+        return $this;
     }
 }

@@ -1,8 +1,11 @@
 <?php
 
+use App\Http\Controllers\CreateBookController;
+use App\Http\Controllers\DeleteBookController;
+use App\Http\Controllers\GetBookController;
+use App\Http\Controllers\ListBooksController;
 use App\Http\Controllers\ListExternalBooksController;
-use App\Http\Controllers\ListUserController;
-use Illuminate\Http\Request;
+use App\Http\Controllers\UpdateBookController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,9 +22,19 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix('v1/books')->as('books.')
     ->group(function () {
-//        Route::get('', ListUserController::class)
-//            ->name('list');
+        Route::post('', CreateBookController::class)
+            ->name('create');
+        Route::get('{book:id}', GetBookController::class)
+            ->name('get');
+        Route::get('', ListBooksController::class)
+            ->name('list');
+        Route::patch('{book:id}', UpdateBookController::class)
+            ->name('update');
+        Route::delete('{book:id}', DeleteBookController::class)
+            ->name('delete');
+        Route::delete('{book:id}', DeleteBookController::class)
+            ->name('delete');
     });
 
-//http://127.0.0.1:7000/api/users?name=&phone=880&address=ayana
+
 Route::get('external-books', ListExternalBooksController::class);
