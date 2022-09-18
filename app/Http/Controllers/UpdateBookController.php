@@ -16,7 +16,7 @@ class UpdateBookController extends Controller
 
         return $this->respondWithSuccess([
             'message' => "The book '{$book->name}' was updated successfully",
-            'data' => BookResource::collection($bookService->listBooks()),
+            'data' => new BookResource($book->refresh()),
         ]);
 
     }
