@@ -15,13 +15,13 @@ class UpdateBookRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|string',
-            'isbn' => 'required|string',
-            'authors' => 'array|required',
-            'country' => 'required',
-            'number_of_pages' => 'required|integer',
-            'publisher' => 'required',
-            'release_date' => 'required|date',
+            'name' => 'filled|string',
+            'isbn' => 'filled|string',
+            'authors' => 'array|filled',
+            'country' => 'filled',
+            'number_of_pages' => 'filled|integer',
+            'publisher' => 'filled',
+            'release_date' => 'filled|date',
         ];
     }
 }
